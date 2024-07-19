@@ -1,8 +1,9 @@
 -- db/seed.sql
 \c job_tracker;
 
-INSERT INTO applications(company, position, status, date_applied) VALUES
-    ('Company A', 'Software Engineer', 'Applied', '2023-06-01'),
-    ('Company B', 'Backend Developer', 'Interviewing', '2023-06-10'),
-    ('Company C', 'Frontend Developer', 'Rejected', '2023-06-15'),
-    ('Company D', 'Full Stack Developer', 'Offered', '2023-06-20');
+INSERT INTO applications (company, position, date_applied, status, notes)
+VALUES
+  ('Google', 'Software Engineer', '2023-10-26', 'Applied', 'Submitted application through website.'),
+  ('Amazon', 'Frontend Developer', '2023-10-22', 'Interviewing', 'First round interview completed.'),
+  ('Microsoft', 'Data Scientist', '2023-10-18', 'Rejected', 'Received rejection email.'),
+  ('Facebook', 'Product Manager', '2023-10-15', 'Applied', 'Referred by a friend.');

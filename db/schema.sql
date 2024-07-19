@@ -10,5 +10,6 @@ CREATE TABLE applications(
     company TEXT NOT NULL,
     position TEXT NOT NULL,
     status TEXT,
-    date_applied DATE
+    date_applied DATE,
+    notes TEXT
 );
