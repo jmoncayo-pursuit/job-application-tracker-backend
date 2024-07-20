@@ -50,18 +50,25 @@ const getApplication = async (id) => {
 
 const createApplication = async (application) => {
   try {
+    // Default date_applied to current date if not provided
+    const dateApplied =
+      application.date_applied ||
+      new Date().toISOString().split('T')[0];
+
     const newApplication = await db.one(
-      'INSERT INTO applications (company, position, status, date_applied) VALUES ($1, $2, $3, $4) RETURNING *',
+      'INSERT INTO applications (company, position, status, date_applied, notes) VALUES ($1, $2, $3, $4, $5) RETURNING *',
       [
         application.company,
         application.position,
         application.status,
-        application.date_applied,
+        dateApplied,
+        application.notes,
       ]
     );
     return newApplication;
   } catch (error) {
-    return error;
+    console.error('Error creating application:', error);
+    throw error;
   }
 };
 
@@ -73,7 +80,8 @@ const deleteApplication = async (id) => {
     );
     return deletedApplication;
   } catch (error) {
-    return error;
+    console.error('Error deleting application:', error);
+    throw error;
   }
 };
 
@@ -92,7 +100,7 @@ const updateApplication = async (id, application) => {
     const updatedApplication = await db.one(query, [...values, id]);
     return updatedApplication;
   } catch (error) {
-    console.error('Error in updateApplication:', error);
+    console.error('Error updating application:', error);
     throw error;
   }
 };
